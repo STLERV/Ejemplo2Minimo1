@@ -36,7 +36,7 @@ public class ProtuctManagerImpl implements ProductManager{
     }
 
 
-    ////////////////////////////////////////////
+    //////////////////////////////////////////////
 
     public void addUser(String idUser) {
         log.info("AñadiendoUsuario");
