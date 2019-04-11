@@ -1,3 +1,7 @@
+package eetac;
+
+import eetac.Caja;
+
 import java.util.LinkedList;
 
 public class Pedido {

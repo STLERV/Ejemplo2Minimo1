@@ -1,3 +1,5 @@
+package eetac;
+
 public class Producto {
 
     int precio;

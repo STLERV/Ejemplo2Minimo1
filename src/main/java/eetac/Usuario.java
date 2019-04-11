@@ -1,3 +1,7 @@
+package eetac;
+
+import eetac.Pedido;
+
 import java.util.LinkedList;
 
 public class Usuario {

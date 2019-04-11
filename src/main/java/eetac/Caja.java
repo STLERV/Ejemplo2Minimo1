@@ -1,9 +1,11 @@
+package eetac;
+
 public class Caja {
     Producto p;
     int cantidad;
     String idPedido;
 
-    public Caja( int cantidad, Producto p, String idPedido) {
+    public Caja(int cantidad, Producto p, String idPedido) {
         this.p = p;
         this.cantidad = cantidad;
         this.idPedido = idPedido;
