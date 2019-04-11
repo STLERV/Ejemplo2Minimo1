@@ -20,6 +20,7 @@ public interface ProductManager {
     public LinkedList<Pedido> listapedidouser(String idUser);
     public int damePedidosUsuario(String idUser);
     public int dameCajasPedido(String idPedido);
+    public int pedidosrealizados();
 
 
 }

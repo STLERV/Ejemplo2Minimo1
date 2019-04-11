@@ -15,10 +15,11 @@ public class ProtuctManagerImpl implements ProductManager {
     final static Logger log = Logger.getLogger(ProtuctManagerImpl.class.getName());
     private static ProductManager instance;
 
-   private HashMap<String, Usuario> users;
+    private HashMap<String, Usuario> users;
     private LinkedList<Producto> listaproductos;
     private LinkedList<Pedido> pedidolist;
     private LinkedList<Caja> cajaslist;
+    private LinkedList<Pedido> realizados;
 
     public ProtuctManagerImpl() {
 
@@ -26,6 +27,7 @@ public class ProtuctManagerImpl implements ProductManager {
         users = new HashMap<String, Usuario>();
         pedidolist = new LinkedList<Pedido>();
         cajaslist = new LinkedList<Caja>();
+        realizados = new LinkedList<Pedido>();
 
     }
 
@@ -94,30 +96,29 @@ public class ProtuctManagerImpl implements ProductManager {
 
     public void hacerpedido(String idUser, String idPedido) {
 
-        Usuario u;
-        u = users.get(idUser);
-        log.info("el id del usuario es" +idUser);
-        Pedido p = new Pedido(idPedido);
-        log.info("Haciendo un pedido con id" + idPedido);
+        log.info("Hacer pedido");
+        Usuario user;
+        user = users.get(idUser);
+        Pedido pedido = new Pedido(idPedido);
+        if (user != null) {
 
-        if (u != null) {
-            log.info("El usuario existe felicidades");
-            for (int i = 0; i < this.cajaslist.size(); i++) {
+            int i = 0;
 
-                if (idPedido.equals(this.cajaslist.get(i).getIdPedido())){
+            for (i = 0; i < this.cajaslist.size(); i++) {
+
+                if (idPedido.equals(this.cajaslist.get(i).getIdPedido())) {
                     Caja caja = this.cajaslist.get(i);
-                    p.addProducto(caja);
-                    log.info("bieeen, tienes una caja con idpedido y posicion = " + idPedido + i);
+                    pedido.addProducto(caja);
                 }
 
             }
-            u.addpedido(p);
-            pedidolist.add(p);
-        }
-        else{
-            log.info("caca");
-        }
+            user.addpedido(pedido);
+            pedidolist.add(pedido);
+        } else {
+            log.error("Usuario");
+
     }
+           }
     public int damePedidosUsuario(String idUser){
         Usuario user = users.get(idUser);
        return user.listapedido.size();
@@ -145,9 +146,17 @@ public class ProtuctManagerImpl implements ProductManager {
     }
 
     public void servirPedido(String idPedido) {
+        Pedido p;
+         p = pedidolist.getFirst();
+         pedidolist.poll();
+         p.setRealizado(true);
+         realizados.add(p);
 
     }
+    public int pedidosrealizados(){
+        return realizados.size();
 
+    }
 
 
     public LinkedList<Producto> listaProductos() {
