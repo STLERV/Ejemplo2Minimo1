@@ -9,9 +9,6 @@ import java.util.LinkedList;
 public class ProtuctManagerImpl implements ProductManager {
 
     ////////////////Singelton////////////////////////
-/////////////Singelton////////
-
-    //
     final static Logger log = Logger.getLogger(ProtuctManagerImpl.class.getName());
     private static ProductManager instance;
 
@@ -47,7 +44,7 @@ public class ProtuctManagerImpl implements ProductManager {
         log.info("AñadiendoUsuario");
         Usuario u = new Usuario(idUser);
         this.users.put(idUser,u);
-        log.info("Usuario añadido con exito" + idUser);
+        log.info("Usuario añadido con exito " + idUser);
     }
 
     public void addProducto( int precio, String id, int ventas) {
@@ -94,7 +91,7 @@ public class ProtuctManagerImpl implements ProductManager {
         //si lo queremos al reves ponemos donde pone int: (int)(-1)*(...)
     }
 
-    public void hacerpedido(String idUser, String idPedido) {
+    public void hacerpedido(String idUser, String idPedido) throws UsuarioException{
 
         log.info("Hacer pedido");
         Usuario user;
@@ -109,6 +106,11 @@ public class ProtuctManagerImpl implements ProductManager {
                 if (idPedido.equals(this.cajaslist.get(i).getIdPedido())) {
                     Caja caja = this.cajaslist.get(i);
                     pedido.addProducto(caja);
+                    Producto p = this.cajaslist.get(i).getP();
+                    int numero = this.cajaslist.get(i).getCantidad();
+                    p.setVentas(numero);
+
+
                 }
 
             }
@@ -116,12 +118,17 @@ public class ProtuctManagerImpl implements ProductManager {
             pedidolist.add(pedido);
         } else {
             log.error("Usuario");
+            throw new UsuarioException();
 
     }
            }
-    public int damePedidosUsuario(String idUser){
+    public int damePedidosUsuario(String idUser) throws UsuarioException {
+
         Usuario user = users.get(idUser);
-       return user.listapedido.size();
+        if (user != null)
+        return user.listapedido.size();
+        else
+            throw new UsuarioException();
     }
 
     public int dameCajasPedido(String idPedido) {
@@ -158,8 +165,26 @@ public class ProtuctManagerImpl implements ProductManager {
 
     }
 
+   /* public LinkedList<Pedido> pedidosrealizados  ( String idUsuario){
+        Usuario u = this.users.get(idUsuario);
+        LinkedList<Pedido> listarealizados = new LinkedList<Pedido>();
+        listarealizados = u.getListapedido();
 
-    public LinkedList<Producto> listaProductos() {
+        for (int i = 0; i < listarealizados.size(); i++){
+             boolean a;
+             a = u.getListapedido().get(i).isRealizado();
+             Pedido p = u.getListapedido().get(i);
+             if ( a = true) {
+                listarealizados.add(p);
+            }
+
+        }
+        return listarealizados;
+
+        }
+        */
+
+        public LinkedList<Producto> listaProductos() {
         return null;
     }
 

@@ -8,6 +8,7 @@ public class Usuario {
     String idUsuario;
     LinkedList<Pedido> listapedido;
 
+
     public Usuario(String idUsuario) {
         this.idUsuario = idUsuario;
         this.listapedido = new LinkedList<Pedido>();
@@ -32,4 +33,6 @@ public class Usuario {
     public void setListapedido(LinkedList<Pedido> listapedido) {
         this.listapedido = listapedido;
     }
+
+
 }

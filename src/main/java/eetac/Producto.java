@@ -32,7 +32,8 @@ public class Producto {
         return ventas;
     }
 
-    public void setVentas(int ventas) {
-        this.ventas = ventas;
+    public void setVentas(int ventas)
+    {
+        this.ventas =  this.ventas + ventas;
     }
 }

@@ -10,6 +10,7 @@ public class Pedido {
     String idPedido;
 
 
+
     public Pedido( LinkedList<Caja> productoslist, String idPedido) {
             this.idPedido = idPedido;
             this.productos= productoslist;
@@ -20,8 +21,8 @@ public class Pedido {
         this.idPedido =idPedido;
         this.productos = new LinkedList<Caja>();
         realizado =false;
-
     }
+
 
     public void addProducto(Caja p){
         this.productos.add(p);
